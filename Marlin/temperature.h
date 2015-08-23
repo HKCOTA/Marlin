@@ -28,44 +28,21 @@
 #endif
 
 // public functions
-void tp_init();  //initialize the heating
+void tp_init();  //initialise the heating
 void manage_heater(); //it is critical that this is called periodically.
-
-#ifdef FILAMENT_SENSOR
-// For converting raw Filament Width to milimeters 
- float analog2widthFil(); 
- 
-// For converting raw Filament Width to an extrusion ratio 
- int widthFil_to_size_ratio();
-#endif
 
 // low level conversion routines
 // do not use these routines and variables outside of temperature.cpp
 extern int target_temperature[EXTRUDERS];  
 extern float current_temperature[EXTRUDERS];
-#ifdef SHOW_TEMP_ADC_VALUES
-  extern int current_temperature_raw[EXTRUDERS];
-  extern int current_temperature_bed_raw;
-#endif
 extern int target_temperature_bed;
 extern float current_temperature_bed;
 #ifdef TEMP_SENSOR_1_AS_REDUNDANT
   extern float redundant_temperature;
 #endif
 
-#if defined(CONTROLLERFAN_PIN) && CONTROLLERFAN_PIN > -1
-  extern unsigned char soft_pwm_bed;
-#endif
-
 #ifdef PIDTEMP
-
-  #ifdef PID_PARAMS_PER_EXTRUDER
-    extern float Kp[EXTRUDERS], Ki[EXTRUDERS], Kd[EXTRUDERS], Kc[EXTRUDERS]; // one param per extruder
-    #define PID_PARAM(param,e) param[e] // use macro to point to array value
-  #else
-    extern float Kp, Ki, Kd, Kc; // one param per extruder - saves 20 or 36 bytes of ram (inc array pointer)
-    #define PID_PARAM(param, e) param // use macro to point directly to value
-  #endif // PID_PARAMS_PER_EXTRUDER	
+  extern float Kp,Ki,Kd,Kc;
   float scalePID_i(float i);
   float scalePID_d(float d);
   float unscalePID_i(float i);
@@ -76,11 +53,6 @@ extern float current_temperature_bed;
   extern float bedKp,bedKi,bedKd;
 #endif
   
-  
-#ifdef BABYSTEPPING
-  extern volatile int babystepsTodo[3];
-#endif
-  
 //high level conversion routines, for use outside of temperature.cpp
 //inline so that there is no performance decrease.
 //deg=degreeCelsius
@@ -88,16 +60,6 @@ extern float current_temperature_bed;
 FORCE_INLINE float degHotend(uint8_t extruder) {  
   return current_temperature[extruder];
 };
-
-#ifdef SHOW_TEMP_ADC_VALUES
-  FORCE_INLINE float rawHotendTemp(uint8_t extruder) {  
-    return current_temperature_raw[extruder];
-  };
-
-  FORCE_INLINE float rawBedTemp() {  
-    return current_temperature_bed_raw;
-  };
-#endif
 
 FORCE_INLINE float degBed() {
   return current_temperature_bed;
@@ -159,15 +121,6 @@ FORCE_INLINE bool isCoolingBed() {
 #define setTargetHotend2(_celsius) do{}while(0)
 #endif
 #if EXTRUDERS > 3
-#define degHotend3() degHotend(3)
-#define degTargetHotend3() degTargetHotend(3)
-#define setTargetHotend3(_celsius) setTargetHotend((_celsius), 3)
-#define isHeatingHotend3() isHeatingHotend(3)
-#define isCoolingHotend3() isCoolingHotend(3)
-#else
-#define setTargetHotend3(_celsius) do{}while(0)
-#endif
-#if EXTRUDERS > 4
 #error Invalid number of extruders
 #endif
 
@@ -178,31 +131,18 @@ void disable_heater();
 void setWatch();
 void updatePID();
 
-#if defined (THERMAL_RUNAWAY_PROTECTION_PERIOD) && THERMAL_RUNAWAY_PROTECTION_PERIOD > 0
-void thermal_runaway_protection(int *state, unsigned long *timer, float temperature, float target_temperature, int heater_id, int period_seconds, int hysteresis_degc);
-static int thermal_runaway_state_machine[4]; // = {0,0,0,0};
-static unsigned long thermal_runaway_timer[4]; // = {0,0,0,0};
-static bool thermal_runaway = false;
-#if TEMP_SENSOR_BED != 0
-  static int thermal_runaway_bed_state_machine;
-  static unsigned long thermal_runaway_bed_timer;
-#endif
-#endif
-
 FORCE_INLINE void autotempShutdown(){
-#ifdef AUTOTEMP
-  if(autotemp_enabled)
-  {
-    autotemp_enabled=false;
-    if(degTargetHotend(active_extruder)>autotemp_min)
-      setTargetHotend(0,active_extruder);
-  }
-#endif
+ #ifdef AUTOTEMP
+ if(autotemp_enabled)
+ {
+  autotemp_enabled=false;
+  if(degTargetHotend(active_extruder)>autotemp_min)
+    setTargetHotend(0,active_extruder);
+ }
+ #endif
 }
 
 void PID_autotune(float temp, int extruder, int ncycles);
 
-void setExtruderAutoFanState(int pin, bool state);
-void checkExtruderAutoFans();
-
 #endif
+

@@ -18,20 +18,18 @@ public:
   //this is to delay autostart and hence the initialisaiton of the sd card to some seconds after the normal init, so the device is available quick after a reset
 
   void checkautostart(bool x); 
-  void openFile(char* name,bool read,bool replace_current=true);
+  void openFile(char* name,bool read);
   void openLogFile(char* name);
   void removeFile(char* name);
-  void closefile(bool store_location=false);
+  void closefile();
   void release();
   void startFileprint();
   void pauseSDPrint();
   void getStatus();
   void printingHasFinished();
 
-  void getfilename(uint16_t nr, const char* const match=NULL);
+  void getfilename(const uint8_t nr);
   uint16_t getnrfilenames();
-  
-  void getAbsFilename(char *t);
   
 
   void ls();
@@ -50,23 +48,18 @@ public:
 public:
   bool saving;
   bool logging;
-  bool sdprinting;  
-  bool cardOK;
-  char filename[FILENAME_LENGTH];
+  bool sdprinting ;  
+  bool cardOK ;
+  char filename[13];
   char longFilename[LONG_FILENAME_LENGTH];
   bool filenameIsDir;
-  int autostart_index;
+  int lastnr; //last number of the autostart;
 private:
   SdFile root,*curDir,workDir,workDirParents[MAX_DIR_DEPTH];
   uint16_t workDirDepth;
   Sd2Card card;
   SdVolume volume;
   SdFile file;
-  #define SD_PROCEDURE_DEPTH 1
-  #define MAXPATHNAMELENGTH (FILENAME_LENGTH*MAX_DIR_DEPTH+MAX_DIR_DEPTH+1)
-  uint8_t file_subcall_ctr;
-  uint32_t filespos[SD_PROCEDURE_DEPTH];
-  char filenames[SD_PROCEDURE_DEPTH][MAXPATHNAMELENGTH];
   uint32_t filesize;
   //int16_t n;
   unsigned long autostart_atmillis;
@@ -77,7 +70,7 @@ private:
   LsAction lsAction; //stored for recursion.
   int16_t nrFiles; //counter for the files in the current directory and recycled as position counter for getting the nrFiles'th name in the directory.
   char* diveDirName;
-  void lsDive(const char *prepend, SdFile parent, const char * const match=NULL);
+  void lsDive(const char *prepend,SdFile parent);
 };
 extern CardReader card;
 #define IS_SD_PRINTING (card.sdprinting)

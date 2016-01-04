@@ -74,7 +74,7 @@
   #define TEMP_BED_PIN 14 // ANALOG NUMBERING
 #endif
 
-#define BEEPER 64
+#define BEEPER_PIN 64
 
 
 #define LCD_PINS_RS 14
@@ -94,10 +94,4 @@
 #define BLEN_B 1
 #define BLEN_A 0
 
-#define SDCARDDETECT -1  // Megatronics does not use this port
-
-// Encoder rotation values
-#define encrot0 0
-#define encrot1 2
-#define encrot2 3
-#define encrot3 1
+#define SD_DETECT_PIN -1  // Megatronics doesn't use this

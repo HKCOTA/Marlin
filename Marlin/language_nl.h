@@ -2,11 +2,16 @@
  * Dutch
  *
  * LCD Menu Messages
- * Please note these are limited to 17 characters!
+ * See also documentation/LCDLanguageFont.md
  *
  */
 #ifndef LANGUAGE_NL_H
 #define LANGUAGE_NL_H
+
+#define MAPPER_NON
+// Define SIMULATE_ROMFONT to see what is seen on the character based display defined in Configuration.h
+//#define SIMULATE_ROMFONT
+#define DISPLAY_CHARSET_ISO10646_1
 
 #define WELCOME_MSG                         MACHINE_NAME " gereed."
 #define MSG_SD_INSERTED                     "Kaart ingestoken"
@@ -46,9 +51,9 @@
 #define MSG_FAN_SPEED                       "Fan snelheid"
 #define MSG_FLOW                            "Flow"
 #define MSG_CONTROL                         "Control"
-#define MSG_MIN                             " \002 Min"
-#define MSG_MAX                             " \002 Max"
-#define MSG_FACTOR                          " \002 Fact"
+#define MSG_MIN                             LCD_STR_THERMOMETER " Min"
+#define MSG_MAX                             LCD_STR_THERMOMETER " Max"
+#define MSG_FACTOR                          LCD_STR_THERMOMETER " Fact"
 #define MSG_AUTOTEMP                        "Autotemp"
 #define MSG_ON                              "Aan "
 #define MSG_OFF                             "Uit"
@@ -76,10 +81,8 @@
 #define MSG_TEMPERATURE                     "Temperatuur"
 #define MSG_MOTION                          "Beweging"
 #define MSG_VOLUMETRIC                      "Filament"
-#define MSG_VOLUMETRIC_ENABLED		        "E in mm3"
-#define MSG_FILAMENT_SIZE_EXTRUDER_0        "Fil. Dia. 1"
-#define MSG_FILAMENT_SIZE_EXTRUDER_1        "Fil. Dia. 2"
-#define MSG_FILAMENT_SIZE_EXTRUDER_2        "Fil. Dia. 3"
+#define MSG_VOLUMETRIC_ENABLED              "E in mm3"
+#define MSG_FILAMENT_DIAM                   "Fil. Dia."
 #define MSG_CONTRAST                        "LCD contrast"
 #define MSG_STORE_EPROM                     "Geheugen opslaan"
 #define MSG_LOAD_EPROM                      "Geheugen laden"
@@ -96,7 +99,7 @@
 #define MSG_DWELL                           "Slapen..."
 #define MSG_USERWAIT                        "Wachten..."
 #define MSG_RESUMING                        "Print hervatten"
-#define MSG_PRINT_ABORTED                   "Print aborted"
+#define MSG_PRINT_ABORTED                   "Print afgebroken"
 #define MSG_NO_MOVE                         "Geen beweging."
 #define MSG_KILLED                          "AFGEBROKEN. "
 #define MSG_STOPPED                         "GESTOPT. "
@@ -118,13 +121,15 @@
 #define MSG_BABYSTEP_Y                      "Babystap Y"
 #define MSG_BABYSTEP_Z                      "Babystap Z"
 #define MSG_ENDSTOP_ABORT                   "Endstop afbr."
+#define MSG_END_HOUR                        "hours"
+#define MSG_END_MINUTE                      "minutes"
 
-#ifdef DELTA_CALIBRATION_MENU
-    #define MSG_DELTA_CALIBRATE             "Delta Calibration"
-    #define MSG_DELTA_CALIBRATE_X           "Calibrate X"
-    #define MSG_DELTA_CALIBRATE_Y           "Calibrate Y"
-    #define MSG_DELTA_CALIBRATE_Z           "Calibrate Z"
-    #define MSG_DELTA_CALIBRATE_CENTER      "Calibrate Center"
+#if ENABLED(DELTA_CALIBRATION_MENU)
+  #define MSG_DELTA_CALIBRATE               "Delta Calibratie"
+  #define MSG_DELTA_CALIBRATE_X             "Kalibreer X"
+  #define MSG_DELTA_CALIBRATE_Y             "Kalibreer Y"
+  #define MSG_DELTA_CALIBRATE_Z             "Kalibreer Z"
+  #define MSG_DELTA_CALIBRATE_CENTER        "Kalibreer Midden"
 #endif // DELTA_CALIBRATION_MENU
 
 #endif // LANGUAGE_NL_H

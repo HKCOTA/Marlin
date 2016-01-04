@@ -2,11 +2,16 @@
  * Basque-Euskera
  *
  * LCD Menu Messages
- * Please note these are limited to 17 characters!
+ * See also documentation/LCDLanguageFont.md
  *
  */
 #ifndef LANGUAGE_EU_H
 #define LANGUAGE_EU_H
+
+#define MAPPER_NON
+// Define SIMULATE_ROMFONT to see what is seen on the character based display defined in Configuration.h
+//#define SIMULATE_ROMFONT
+#define DISPLAY_CHARSET_ISO10646_1
 
 #define WELCOME_MSG                         MACHINE_NAME " prest."
 #define MSG_SD_INSERTED                     "Txartela sartuta"
@@ -46,9 +51,9 @@
 #define MSG_FAN_SPEED                       "Haizagailua"
 #define MSG_FLOW                            "Fluxua"
 #define MSG_CONTROL                         "Kontrola"
-#define MSG_MIN                             " \002 Min"
-#define MSG_MAX                             " \002 Max"
-#define MSG_FACTOR                          " \002 Faktorea"
+#define MSG_MIN                             LCD_STR_THERMOMETER " Min"
+#define MSG_MAX                             LCD_STR_THERMOMETER " Max"
+#define MSG_FACTOR                          LCD_STR_THERMOMETER " Faktorea"
 #define MSG_AUTOTEMP                        "Auto tenperatura"
 #define MSG_ON                              "On "
 #define MSG_OFF                             "Off"
@@ -76,10 +81,8 @@
 #define MSG_TEMPERATURE                     "Tenperatura"
 #define MSG_MOTION                          "Mugimendua"
 #define MSG_VOLUMETRIC                      "Filament"
-#define MSG_VOLUMETRIC_ENABLED		        "E in mm3"
-#define MSG_FILAMENT_SIZE_EXTRUDER_0        "Fil. Dia. 1"
-#define MSG_FILAMENT_SIZE_EXTRUDER_1        "Fil. Dia. 2"
-#define MSG_FILAMENT_SIZE_EXTRUDER_2        "Fil. Dia. 3"
+#define MSG_VOLUMETRIC_ENABLED              "E in mm3"
+#define MSG_FILAMENT_DIAM                   "Fil. Dia."
 #define MSG_CONTRAST                        "LCD kontrastea"
 #define MSG_STORE_EPROM                     "Gorde memoria"
 #define MSG_LOAD_EPROM                      "Kargatu memoria"
@@ -118,13 +121,15 @@
 #define MSG_BABYSTEP_Y                      "Babystep Y"
 #define MSG_BABYSTEP_Z                      "Babystep Z"
 #define MSG_ENDSTOP_ABORT                   "Endstop deuseztat"
+#define MSG_END_HOUR                        "hours"
+#define MSG_END_MINUTE                      "minutes"
 
-#ifdef DELTA_CALIBRATION_MENU
-    #define MSG_DELTA_CALIBRATE             "Delta Calibration"
-    #define MSG_DELTA_CALIBRATE_X           "Calibrate X"
-    #define MSG_DELTA_CALIBRATE_Y           "Calibrate Y"
-    #define MSG_DELTA_CALIBRATE_Z           "Calibrate Z"
-    #define MSG_DELTA_CALIBRATE_CENTER      "Calibrate Center"
+#if ENABLED(DELTA_CALIBRATION_MENU)
+  #define MSG_DELTA_CALIBRATE               "Delta Calibration"
+  #define MSG_DELTA_CALIBRATE_X             "Calibrate X"
+  #define MSG_DELTA_CALIBRATE_Y             "Calibrate Y"
+  #define MSG_DELTA_CALIBRATE_Z             "Calibrate Z"
+  #define MSG_DELTA_CALIBRATE_CENTER        "Calibrate Center"
 #endif // DELTA_CALIBRATION_MENU
 
 #endif // LANGUAGE_EU_H

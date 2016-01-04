@@ -45,6 +45,11 @@
     #define DOGLCD  // Support for I2C LCD 128x64 (Controller SSD1306 graphic Display Family)
   #endif
 
+  // Generic support for SH1106 SPI OLED Display.
+  #if ENABLED(U8GLIB_SH1106)
+    #define ULTRA_LCD  //general LCD support, also 16x2
+    #define DOGLCD  // Support for I2C LCD 128x64 (Controller SSD1306 graphic Display Family)
+  #endif
 
   #if ENABLED(PANEL_ONE)
     #define ULTIMAKERCONTROLLER
@@ -204,6 +209,9 @@
       #undef HAS_LCD_CONTRAST
     #endif
     #if ENABLED(U8GLIB_SSD1306)
+      #undef HAS_LCD_CONTRAST
+    #endif
+    #if ENABLED(U8GLIB_SH1106)
       #undef HAS_LCD_CONTRAST
     #endif
   #endif

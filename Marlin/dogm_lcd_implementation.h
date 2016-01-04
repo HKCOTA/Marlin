@@ -128,6 +128,9 @@
 #elif ENABLED(U8GLIB_SSD1306)
   // Generic support for SSD1306 OLED I2C LCDs
   U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_NONE);
+#elif ENABLED(U8GLIB_SH1106)
+  // Generic support for SH1106 OLED SPI LCDs
+  U8GLIB_SH1106_128X64 u8g(23, 17, 16, 25, 27);  // SW-SPI (sck, mosi, cs, a0 ,reset)
 #elif ENABLED(MINIPANEL)
   // The MINIPanel display
   U8GLIB_MINI12864 u8g(DOGLCD_CS, DOGLCD_A0);

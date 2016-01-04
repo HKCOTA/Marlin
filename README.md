@@ -1,3 +1,23 @@
+# TinyBoy 3D Printer Frimware - modified from Marlin 3D Printer Firmware
+<img align="top" width=175 src="Documentation/Logo/tinyboy.png" />
+
+## Preparation
+Before to compile the firmware, __please make sure you have installed the necessary libraries.__
+
+TinyBoy needs U8GLib library to support the display.
+The U8GLib library is already included in ArduinoAddons/Arduino_1.0.x/libraries
+
+### How to install necessary libraries?
+- Installation with IDE
+  1. Start Arduino IDE
+  2. In the Arduino IDE, import the library from the "Sketch"->"Import Library"->"Add Library" Menu.
+
+__OR__
+
+- Manual Installation
+  1. Unzip or copy the necessary folders into the "libraries" folder of the Arduino IDE
+  2. Start Arduino IDE
+
 # Marlin 3D Printer Firmware
 <img align="top" width=175 src="Documentation/Logo/Marlin%20Logo%20GitHub.png" />
  Additional documentation can be found in [our wiki](https://github.com/MarlinFirmware/Marlin/wiki/Main-Page).
